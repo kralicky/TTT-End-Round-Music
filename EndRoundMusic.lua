@@ -1,11 +1,3 @@
-////////////////////////////////////
-//							      //
-//		TTT End Round Music		  //
-//		 Created by Cobalt		  //
-//	  Donut Steel Inc, (c) 2014	  //
-//								  //
-////////////////////////////////////
-
 if ( SERVER ) then
 	
 	--[[
