@@ -68,7 +68,7 @@ if ( CLIENT ) then
 end
 
 -- ULX Commands
-function ulx.playurl( calling_ply, url )
+function ulx.playurl( calling_ply, url, volume )
 
 	umsg.Start( "playurl", player.GetAll() )
 		umsg.String( url )
@@ -79,6 +79,7 @@ function ulx.playurl( calling_ply, url )
 end
 local playurl = ulx.command( "Fun", "ulx playurl", ulx.playurl, "!playurl" )
 playurl:addParam{ type=ULib.cmds.StringArg, hint="url" }
+playurl:addParam{ type=ULib.cmds.NumArg, min=0, max=100, default=50, hint="volume", ULib.cmds.optional, ULib.cmds.round }
 playurl:defaultAccess( ULib.ACCESS_ADMIN )
 playurl:help( "Play a sound from a URL." )
 
@@ -86,6 +87,7 @@ function ulx.playurlcl( calling_ply, url )
 
 	umsg.Start( "playurlcl", calling_ply )
 		umsg.String( url )
+		umsg.Long( volume )
 	umsg.End()
 	
 	ulx.fancyLog( { calling_ply }, "URL #s playing locally (type !stop to stop)", url )
@@ -95,6 +97,22 @@ local playurlcl = ulx.command( "Fun", "ulx playurlcl", ulx.playurlcl, "!playurlc
 playurlcl:addParam{ type=ULib.cmds.StringArg, hint="url" }
 playurlcl:defaultAccess( ULib.ACCESS_ALL )
 playurlcl:help( "Play a sound from a URL for yourself." )
+
+function ulx.playvolume( calling_ply, volume )
+
+	umsg.Start( "playvolume", player.GetAll() )
+		umsg.Long( volume )
+	umsg.End()
+	
+	ulx.fancyLogAdmin( calling_ply, "#A set volume #s", volume )
+	
+end
+
+
+local playvolume = ulx.command( "Fun", "ulx playvolume", ulx.playvolume, "!playvolume" )
+playvolume:addParam{ type=ULib.cmds.NumArg, min=0, max=100, default=50, hint="times", ULib.cmds.optional, ULib.cmds.round }
+playvolume:defaultAccess( ULib.ACCESS_ADMIN )
+playvolume:help( "Sets the volume." )
 
 function ulx.stopurl( calling_ply )
 
@@ -359,6 +377,7 @@ if ( CLIENT ) then
 	usermessage.Hook( "playurl", function( um )
 	
 		local url = um:ReadString()
+		local volume = um:ReadLong() / 100
 		local isEOR = um:ReadBool()
 		
 		if isEOR == true and GetConVar( "ttt_eor_music_enabled" ):GetInt() == 0 then
@@ -374,9 +393,21 @@ if ( CLIENT ) then
         sound.PlayURL( url, "", function( station )
 			if station and IsValid( station ) then
 				station:Play()
-				LocalPlayer().channel = station
+				LocalPlayer().channel = statio
+				LocalPlayer().channel:SetVolume(volume)
 			end
         end )
+		
+	end )	
+
+	usermessage.Hook( "playvolume", function( um )
+	
+		local volume = um:ReadLong() / 100
+		local ply = LocalPlayer()
+		
+		if ply.channel and IsValid( ply.channel ) then
+			ply.channel:SetVolume(volume)
+        end
 		
 	end )	
 	
