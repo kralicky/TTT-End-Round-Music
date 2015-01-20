@@ -393,7 +393,7 @@ if ( CLIENT ) then
         sound.PlayURL( url, "", function( station )
 			if station and IsValid( station ) then
 				station:Play()
-				LocalPlayer().channel = statio
+				LocalPlayer().channel = station
 				LocalPlayer().channel:SetVolume(volume)
 			end
         end )
