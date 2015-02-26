@@ -72,6 +72,7 @@ function ulx.playurl( calling_ply, url, volume )
 
 	umsg.Start( "playurl", player.GetAll() )
 		umsg.String( url )
+		umsg.Long ( volume )
 	umsg.End()
 	
 	ulx.fancyLogAdmin( calling_ply, "#A played URL #s (type !stop to stop)", url )
@@ -83,7 +84,7 @@ playurl:addParam{ type=ULib.cmds.NumArg, min=0, max=100, default=50, hint="volum
 playurl:defaultAccess( ULib.ACCESS_ADMIN )
 playurl:help( "Play a sound from a URL." )
 
-function ulx.playurlcl( calling_ply, url )
+function ulx.playurlcl( calling_ply, url, volume )
 
 	umsg.Start( "playurlcl", calling_ply )
 		umsg.String( url )
@@ -95,6 +96,7 @@ function ulx.playurlcl( calling_ply, url )
 end
 local playurlcl = ulx.command( "Fun", "ulx playurlcl", ulx.playurlcl, "!playurlcl" )
 playurlcl:addParam{ type=ULib.cmds.StringArg, hint="url" }
+playurlcl:addParam{ type=ULib.cmds.NumArg, min=0, max=100, default=50, hint="volume", ULib.cmds.optional, ULib.cmds.round }
 playurlcl:defaultAccess( ULib.ACCESS_ALL )
 playurlcl:help( "Play a sound from a URL for yourself." )
 
@@ -184,7 +186,7 @@ if ( SERVER ) then
 				
 				umsg.Start( "playurl", player.GetAll() )
 					umsg.String( toPlay[ 3 ] )
-					umsg.Bool( true )
+					umsg.Long ( 50 )
 				umsg.End()
 				
 				umsg.Start( "SendSongName", player.GetAll() )
@@ -203,7 +205,7 @@ if ( SERVER ) then
 					
 					umsg.Start( "playurl", player.GetAll() )
 						umsg.String( toPlay[ 1 ] )
-						umsg.Bool( true )						
+						umsg.Long ( 50 )						
 					umsg.End()
 					
 					umsg.Start( "SendSongName", player.GetAll() )
@@ -216,7 +218,7 @@ if ( SERVER ) then
 					
 					umsg.Start( "playurl", player.GetAll() )
 						umsg.String( toPlay[ 1 ] )
-						umsg.Bool( true )	
+						umsg.Long ( 50 )	
 					umsg.End()
 					
 					umsg.Start( "SendSongName", player.GetAll() )
@@ -229,7 +231,7 @@ if ( SERVER ) then
 					
 					umsg.Start( "playurl", player.GetAll() )
 						umsg.String( toPlay[ 1 ] )
-						umsg.Bool( true )	
+						umsg.Long ( 50 )	
 					umsg.End()
 					
 					umsg.Start( "SendSongName", player.GetAll() )
@@ -359,6 +361,7 @@ if ( CLIENT ) then
 	usermessage.Hook( "playurlcl", function( um )
 	
 		local url = um:ReadString()
+		local volume = um:ReadLong() / 100
 		local ply = LocalPlayer()
 		
 		if ply.channel and IsValid( ply.channel ) then
@@ -368,7 +371,8 @@ if ( CLIENT ) then
         sound.PlayURL( url, "", function( station )		
 			if station and IsValid( station ) then			
 				station:Play()
-				LocalPlayer().channel = station				
+				LocalPlayer().channel = station	
+				LocalPlayer().channel:SetVolume(volume)			
 			end			
         end )
 		
