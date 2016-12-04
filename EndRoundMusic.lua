@@ -200,43 +200,45 @@ if ( SERVER ) then
 			else
 			
 				if win == WIN_INNOCENT then
-				
-					local toPlay = table.Random( innowinsounds )
+					if( !GetConVar( "ttt_eor_music_disabled" ):GetBool( ) ) then
+						local toPlay = table.Random( innowinsounds )
 					
-					umsg.Start( "playurl", player.GetAll() )
-						umsg.String( toPlay[ 1 ] )
-						umsg.Long ( 50 )						
-					umsg.End()
+						umsg.Start( "playurl", player.GetAll() )
+							umsg.String( toPlay[ 1 ] )
+							umsg.Long ( 50 )						
+						umsg.End()
 					
-					umsg.Start( "SendSongName", player.GetAll() )
-						umsg.String( toPlay[ 2 ] )
-					umsg.End()
 					
+						umsg.Start( "SendSongName", player.GetAll() )
+							umsg.String( toPlay[ 2 ] )
+						umsg.End()
+					end
 				elseif win == WIN_TRAITOR then
-				
-					local toPlay = table.Random( traitorwinsounds )
+					if( !GetConVar( "ttt_eor_music_disabled" ):GetBool( ) ) then
+						local toPlay = table.Random( traitorwinsounds )
 					
-					umsg.Start( "playurl", player.GetAll() )
-						umsg.String( toPlay[ 1 ] )
-						umsg.Long ( 50 )	
-					umsg.End()
+						umsg.Start( "playurl", player.GetAll() )
+							umsg.String( toPlay[ 1 ] )
+							umsg.Long ( 50 )	
+						umsg.End()
 					
-					umsg.Start( "SendSongName", player.GetAll() )
-						umsg.String( toPlay[ 2 ] )
-					umsg.End()
-					
+						umsg.Start( "SendSongName", player.GetAll() )
+							umsg.String( toPlay[ 2 ] )
+						umsg.End()
+					end
 				elseif win == WIN_TIMELIMIT then
-				
-					local toPlay = table.Random( timelimitsounds )
+					if( !GetConVar( "ttt_eor_music_disabled" ):GetBool( ) ) then
+						local toPlay = table.Random( timelimitsounds )
 					
-					umsg.Start( "playurl", player.GetAll() )
-						umsg.String( toPlay[ 1 ] )
-						umsg.Long ( 50 )	
-					umsg.End()
+						umsg.Start( "playurl", player.GetAll() )
+							umsg.String( toPlay[ 1 ] )
+							umsg.Long ( 50 )	
+						umsg.End()
 					
-					umsg.Start( "SendSongName", player.GetAll() )
-						umsg.String( toPlay[ 2 ] )
-					umsg.End()
+						umsg.Start( "SendSongName", player.GetAll() )
+							umsg.String( toPlay[ 2 ] )
+						umsg.End()
+					end
 					
 				end
 				
@@ -348,7 +350,7 @@ end
 -- Clientside networking and GUI
 if ( CLIENT ) then
 	
-	CreateClientConVar( "ttt_eor_music_enabled", "1", FCVAR_ARCHIVE )
+	CreateClientConVar( "ttt_eor_music_disabled", "1", true, nil )
 	
 	if not file.Exists( "radio", "DATA" ) then
 		file.CreateDir( "radio" )
@@ -384,7 +386,7 @@ if ( CLIENT ) then
 		local volume = um:ReadLong() / 100
 		local isEOR = um:ReadBool()
 		
-		if isEOR == true and GetConVar( "ttt_eor_music_enabled" ):GetInt() == 0 then
+		if isEOR == true and ( !GetConVar( "ttt_eor_music_disabled" ):GetBool( ) ) then
 			return
 		end
 		
@@ -455,10 +457,6 @@ if ( CLIENT ) then
 	end )
 	
 	usermessage.Hook( "stop_preround", function( um )
-		
-		if GetConVar( "ttt_eor_music_enabled" ):GetInt() == 0 then
-			return
-		end
 		
 		local ply = LocalPlayer()
 		
@@ -891,7 +889,7 @@ if ( CLIENT ) then
 		local Music = vgui.Create( "DForm", musicsettings )
 		Music:SetName( "End Round Music" )
 		
-		setting = Music:CheckBox( "Enable End Round Music", "ttt_eor_music_enabled" )
+		setting = Music:CheckBox( "Disable End Round Music", "ttt_eor_music_disabled" )
 		setting:SetTooltip( "Disable EOR Music" )
 
 		musicsettings:AddItem( Music )
