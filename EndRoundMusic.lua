@@ -9,8 +9,7 @@ if ( SERVER ) then
 	--]]
 	
 	innowinsounds = {
-		{ "https://www.dropbox.com/s/m460os1qlfp9xa0/Queen%20-%20Don%27t%20stop%20me%20now.mp3?dl=1", "Queen - Don't Stop Me Now" },
-		{ "https://www.dropbox.com/s/qtzguewozdx7o8z/Europe%20-%20The%20Final%20Countdown%20chorus.mp3?dl=1", "Europe - The Final Countdown (Chorus)" },
+
 		{ "http://ltbttt.site.nfoservers.com/erm/bimh.mp3", "Redlight King - Bullet In My Hand" },
 		{ "http://ltbttt.site.nfoservers.com/erm/99p.mp3", "Jay-Z - 99 Problems" },
 		{ "http://ltbttt.site.nfoservers.com/erm/bondtheme.mp3", "James Bond Theme" },
@@ -35,19 +34,16 @@ if ( SERVER ) then
 		{ "http://ltbttt.site.nfoservers.com/erm/horseshoes.mp3", "Green Day - Horseshoes and Hand Grenades" },
 		{ "http://ltbttt.site.nfoservers.com/erm/wid.mp3", "Linkin Park - What I've done" },
 		{ "http://ltbttt.site.nfoservers.com/erm/griefers.mp3", "Deadmau5 - Professional Griefers" },
-		{ "http://ltbttt.site.nfoservers.com/erm/backdown.mp3", "Eminem - Won't Back Down ft. P!nk" },
-		{ "https://www.dropbox.com/s/omamsbfy2r0qscg/Queen%20-%20%27Bohemian%20Rhapsody%27.mp3?dl=1", "Queen - Bohemian Rhapsody" }
-		
+		{ "http://ltbttt.site.nfoservers.com/erm/backdown.mp3", "Eminem - Won't Back Down ft. P!nk" }
 	}
 
 	timelimitsounds = {
 
-		{ "https://www.dropbox.com/s/qtzguewozdx7o8z/Europe%20-%20The%20Final%20Countdown%20chorus.mp3?dl=1", "Europe - The Final Countdown (Chorus)" },
 		{ "http://ltbttt.site.nfoservers.com/erm/yolo.mp3", "Lonely Island - YOLO" },
 		{ "http://ltbttt.site.nfoservers.com/erm/poke.mp3", "Pokemon Theme" },
 		{ "http://ltbttt.site.nfoservers.com/erm/nggyu.mp3", "Rick Astley - Never Gonna Give you Up" },
 		{ "http://ltbttt.site.nfoservers.com/erm/bitw.mp3", "Trashmen - Bird is the Word" },
-		{ "https://www.dropbox.com/s/m460os1qlfp9xa0/Queen%20-%20Don%27t%20stop%20me%20now.mp3?dl=1", "Queen - Don't Stop Me Now" },
+		{ "http://ltbttt.site.nfoservers.com/erm/teapot.mp3", "Teapot - Axis and the System" },
 		{ "http://ltbttt.site.nfoservers.com/erm/spaghetti.mp3", "Lose Yourself Spaghetti Remix" },
 		{ "http://ltbttt.site.nfoservers.com/erm/slatfaltf.mp3", "Hitchhiker's Guide - So Long and Thanks For All The Fish" },
 		{ "http://ltbttt.site.nfoservers.com/erm/thriftshop.mp3", "Macklemore - Thrift Shop ft. Wanz" },
