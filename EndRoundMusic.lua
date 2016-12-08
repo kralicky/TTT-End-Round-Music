@@ -237,13 +237,11 @@ if ( SERVER ) then
 					umsg.Start( "SendSongName", player.GetAll() )
 						umsg.String( toPlay[ 2 ] )
 					umsg.End()
-					
 				end
-				
 			end
 			
 		end )
-		
+	
 		hook.Add( "TTTPrepareRound", "StopSounds", function()
 			
 			umsg.Start( "stop_preround", player.GetAll() )
@@ -348,7 +346,7 @@ end
 -- Clientside networking and GUI
 if ( CLIENT ) then
 	
-	CreateClientConVar( "ttt_eor_music_enabled", "1", FCVAR_ARCHIVE )
+	CreateClientConVar( "ttt_eor_music_disabled", "0", false, FCVAR_USERINFO, FCVAR_ARCHIVE )
 	
 	if not file.Exists( "radio", "DATA" ) then
 		file.CreateDir( "radio" )
@@ -380,27 +378,29 @@ if ( CLIENT ) then
 	
 	usermessage.Hook( "playurl", function( um )
 	
-		local url = um:ReadString()
-		local volume = um:ReadLong() / 100
-		local isEOR = um:ReadBool()
+		if GetConVar( "ttt_eor_music_disabled" ):GetBool( ) then
+			local ply = LocalPlayer()
 		
-		if isEOR == true and GetConVar( "ttt_eor_music_enabled" ):GetInt() == 0 then
-			return
-		end
-		
-		local ply = LocalPlayer()
-		
-		if ply.channel and IsValid( ply.channel ) then
-			ply.channel:Stop()
-        end
-		
-        sound.PlayURL( url, "", function( station )
-			if station and IsValid( station ) then
-				station:Play()
-				LocalPlayer().channel = station
-				LocalPlayer().channel:SetVolume(volume)
+			if ply.channel and IsValid( ply.channel ) then
+				ply.channel:Stop()
 			end
-        end )
+			
+		else
+		
+			local url = um:ReadString()
+			local volume = um:ReadLong() / 100
+			local isEOR = um:ReadBool()
+			
+			sound.PlayURL( url, "", function( station )
+				if station and IsValid( station ) then
+					station:Play()
+					LocalPlayer().channel = station
+					LocalPlayer().channel:SetVolume(volume)
+				end
+				
+			end )
+		
+		end
 		
 	end )	
 
@@ -429,22 +429,28 @@ if ( CLIENT ) then
 	end )	
 	
 	usermessage.Hook( "SendSongName", function( um )
-	
-		local name = um:ReadString()
 		
-		hook.Add( "HUDPaint", "DrawSongName", function()
+		if !GetConVar( "ttt_eor_music_disabled" ):GetBool( ) then
+	
+			local name = um:ReadString()
+		
+			hook.Add( "HUDPaint", "DrawSongName", function()
 			
-			local width
+				local width
 			
-			if string.len( name ) >= 15 then
-				width = 18 * string.len( name )
-			else
-				width = 270
-			end
+				if string.len( name ) >= 15 then
+					width = 18 * string.len( name )
+				else
+					width = 270
+				end
 			
-			draw.WordBox( 8, 5, 5, "Now Playing: " .. name, "Trebuchet24", Color( 0, 0, 0, 100 ), Color( 255, 255, 255, 200 ) )
-			
-		end )
+				draw.WordBox( 8, 5, 5, "Now Playing: " .. name, "Trebuchet24", Color( 0, 0, 0, 100 ), Color( 255, 255, 255, 200 ) )
+			end )
+		else
+			hook.Add( "HUDPaint", "DrawSongName", function()
+				draw.WordBox( 8, 5, 5, "End Round Music Disabled! (Enable in F1 Menu)", "Trebuchet24", Color( 255, 0, 0, 100 ), Color( 255, 255, 255, 255 ) )
+			end )
+		end
 		
 	end )	
 	
@@ -455,10 +461,6 @@ if ( CLIENT ) then
 	end )
 	
 	usermessage.Hook( "stop_preround", function( um )
-		
-		if GetConVar( "ttt_eor_music_enabled" ):GetInt() == 0 then
-			return
-		end
 		
 		local ply = LocalPlayer()
 		
@@ -891,8 +893,8 @@ if ( CLIENT ) then
 		local Music = vgui.Create( "DForm", musicsettings )
 		Music:SetName( "End Round Music" )
 		
-		setting = Music:CheckBox( "Enable End Round Music", "ttt_eor_music_enabled" )
-		setting:SetTooltip( "Disable EOR Music" )
+		setting = Music:CheckBox( "Disable End Round Music", "ttt_eor_music_disabled" )
+		setting:SetTooltip( "Disables End Of Round Music" )
 
 		musicsettings:AddItem( Music )
 
