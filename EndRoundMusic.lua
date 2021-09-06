@@ -10,47 +10,13 @@ if ( SERVER ) then
 	
 	innowinsounds = {
 
-		{ "http://ltbttt.site.nfoservers.com/erm/bimh.mp3", "Redlight King - Bullet In My Hand" },
-		{ "http://ltbttt.site.nfoservers.com/erm/99p.mp3", "Jay-Z - 99 Problems" },
-		{ "http://ltbttt.site.nfoservers.com/erm/bondtheme.mp3", "James Bond Theme" },
-		{ "http://ltbttt.site.nfoservers.com/erm/ra.mp3", "Imagine Dragons - Radioactive" },
-		{ "http://ltbttt.site.nfoservers.com/erm/csi.mp3", "The Who - Won't get fooled again" },
-		{ "http://ltbttt.site.nfoservers.com/erm/wnb.mp3", "Breaking Benjamin - I Will Not Bow" },
-		{ "http://ltbttt.site.nfoservers.com/erm/kwyd.mp3", "Fallout Boy - My Songs Know What You Did In The Dark (Light 'em Up)" },
-		{ "http://ltbttt.site.nfoservers.com/erm/betrayal.mp3", "Bullet For My Valantine - Your Betrayal" }
-		
-		
 	}
 
 	traitorwinsounds = {
 
-		{ "http://ltbttt.site.nfoservers.com/erm/ggfk.mp3", "The Offspring - Gonna Go Far Kid" },
-		{ "http://ltbttt.site.nfoservers.com/erm/awtd.mp3", "Alicia Keyes - Another Way to Die ft. Jack White" },
-		{ "http://ltbttt.site.nfoservers.com/erm/ew.mp3", "Moby - Extreme Ways" },
-		{ "http://ltbttt.site.nfoservers.com/erm/monster.mp3", "Skillet - Monster" },
-		{ "http://ltbttt.site.nfoservers.com/erm/city.mp3", "Hollywood Undead - City" },
-		{ "http://ltbttt.site.nfoservers.com/erm/momentum.mp3", "Dancing Lotus - Momentum ft. 2deep" },
-		{ "http://ltbttt.site.nfoservers.com/erm/aobtd.mp3", "Queen - Another One Bites the Dust" },
-		{ "http://ltbttt.site.nfoservers.com/erm/horseshoes.mp3", "Green Day - Horseshoes and Hand Grenades" },
-		{ "http://ltbttt.site.nfoservers.com/erm/wid.mp3", "Linkin Park - What I've done" },
-		{ "http://ltbttt.site.nfoservers.com/erm/griefers.mp3", "Deadmau5 - Professional Griefers" },
-		{ "http://ltbttt.site.nfoservers.com/erm/backdown.mp3", "Eminem - Won't Back Down ft. P!nk" }
 	}
 
 	timelimitsounds = {
-
-		{ "http://ltbttt.site.nfoservers.com/erm/yolo.mp3", "Lonely Island - YOLO" },
-		{ "http://ltbttt.site.nfoservers.com/erm/poke.mp3", "Pokemon Theme" },
-		{ "http://ltbttt.site.nfoservers.com/erm/nggyu.mp3", "Rick Astley - Never Gonna Give you Up" },
-		{ "http://ltbttt.site.nfoservers.com/erm/bitw.mp3", "Trashmen - Bird is the Word" },
-		{ "http://ltbttt.site.nfoservers.com/erm/teapot.mp3", "Teapot - Axis and the System" },
-		{ "http://ltbttt.site.nfoservers.com/erm/spaghetti.mp3", "Lose Yourself Spaghetti Remix" },
-		{ "http://ltbttt.site.nfoservers.com/erm/slatfaltf.mp3", "Hitchhiker's Guide - So Long and Thanks For All The Fish" },
-		{ "http://ltbttt.site.nfoservers.com/erm/thriftshop.mp3", "Macklemore - Thrift Shop ft. Wanz" },
-		{ "http://ltbttt.site.nfoservers.com/erm/ggf.mp3", "GOTTA GO FAST" },
-		{ "http://ltbttt.site.nfoservers.com/erm/oot.mp3", "Rolling Stones - Out Of Time" },
-		{ "http://ltbttt.site.nfoservers.com/erm/dance.mp3", "Men Without Hats - Safety Dance" },
-		{ "http://ltbttt.site.nfoservers.com/erm/longesttime.mp3", "Billy Joel - For the Longest Time" }
 
 	}
 
